@@ -338,9 +338,9 @@ local application_color_2 = windows_highlight_color
 
 
 
-application_focus_bar(windows_application_position_x[109]-20, windows_application_position_y[109]-20, 640, 17,application_name, 8)
+application_focus_bar(windows_application_position_x[109]-20, windows_application_position_y[109]-20, 640, 17,application_name, 109)
 
-if application_focus_button(windows_application_position_x[109]+510, windows_application_position_y[109]-20, 30, 17, "exit", 8) == true then
+if application_focus_button(windows_application_position_x[109]+510, windows_application_position_y[109]-20, 30, 17, "exit", 109) == true then
 
 helloworld = false
 windows_application_position_x[109] = 100
@@ -348,24 +348,26 @@ windows_application_position_y[109] = 100 - 70
 
 end
 
-if application_focus_button(windows_application_position_x[109]+480, windows_application_position_y[109]-20, 30, 17, "maximize", 8) == true then
+if application_focus_button(windows_application_position_x[109]+480, windows_application_position_y[109]-20, 30, 17, "maximize", 109) == true then
 
 windows_application_position_x[109] = 100
 windows_application_position_y[109] = 100 - 70
 
 end
 
-if application_focus_button(windows_application_position_x[109]+460, windows_application_position_y[109]-20, 20, 17, "minimize", 8) == true then
+if application_focus_button(windows_application_position_x[109]+460, windows_application_position_y[109]-20, 20, 17, "minimize", 109) == true then
 
 windows_application_position_x[109] = 1000
 
 end
 
-windows_background(windows_application_position_x[109]-100, windows_application_position_y[109]-1, 640, 448, "box", application_color_1, application_name, 8)
+windows_background(windows_application_position_x[109]-100, windows_application_position_y[109]-1, 640, 448, "box", application_color_1, application_name, 109)
 helloworld_ui()
 
 
 end
+
+
 ```
 
 You will now need to add your new program to the system stack. In the System32 folder open get_programs.lua. Inside of the code you will add this:
