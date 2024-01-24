@@ -1,4 +1,4 @@
-# Windows-10-for-PlayStation-2
+# Windows 10-for PlayStation 2
 A made-from-scratch port of Windows 10 for the PlayStation 2.
 
 
@@ -9,6 +9,46 @@ All glory to God, Jesus Christ, and the Holy Spirit.
 This project was made for the glory of God and the fun of programming. Make sure you read the Bible and believe in God. Nothing would be possible without His blessing and grace.
 
 Windows 10 for PlayStation 2 is a Plushie Studios project (2023-2024). The source code and programming are available to all and are not copyrighted. You may use our code for whatever purposes you desire. Microsoft does not, and is in no way a part of the development of this operating system. We do not intend to impersonate or falsely mislead users that this is a Microsoft product. The intention of this operating system is to imitate Windows 10 as closely as possible with completely original source code. This operating system was developed using PS2SDK and Enceladus.
+
+## Discord server for development: https://discord.gg/HSbASGDgmY
+
+Feel free to contibute to this project and help make this operating system more viable and functional!
+
+
+
+### Installation:
+
+
+Copy the System folder to the root of your USB Drive and place Windows 10.elf anywhere you wish. Once you run Windows 10.elf it will begin the Windows 10 Setup Assistant which will install the operating system.
+
+
+
+### Features:
+
+Support for USB Keyboards.
+
+Support for wav audio format alongside the ability to pull album covers.
+
+Basic operating system functions such as a desktop, cursor, buttons, and data storage.
+
+A file explorer.
+
+Command Prompt for managing the operating system.
+
+Registry Editor to allow for the creation of registries and variables which can be used by applications.
+
+A calculator with basic mathematical logic.
+
+A fully featured Settings application with personalization features.
+
+Screensaver.
+
+Security checks and priveleges.
+
+And much more!
+
+
+
 
 
 
@@ -167,10 +207,39 @@ windows_box_text_input(posx, posy, xlength, ylength, resource_type, resource, ac
 
 windows_box_text_input_string(posx, posy, xlength, ylength, resource_type, resource) - Builds a text input string box. This varies in the previous input box in that it does not compare the information given, rather it is used to pass it into another variable for purposes such as data storage and user input.
 
-windows_button(posx, posy, xlength, ylength, resource_type, resource, highlight, active_code, sleep, id) - Builds a button. 
+windows_button(posx, posy, xlength, ylength, resource_type, resource, highlight, active_code, sleep, id) - Builds a button.
+
+windows_background(posx, posy, xlength, ylength, resource_type, resource, name, id) - Builds a background for an application. You will need to use this to create the collision for your application so the system can find it in it's application focus when the user has their cursor within it's area.
+
+application_focus_bar(posx, posy, xlength, ylength, name, id) - This is used to allow the user to move the application across the screen.
+
+application_focus_button(posx, posy, xlength, ylength, type, id) - Builds an application focus button. This is used in conjunction with the application focus bar. The 'type' input is used to determine the kind of button in use. Applicable syntax for 'type' are: exit, minimize, maximize. Returns true when the button is pressed.
+
+windows_right_bar_status() - Toggles the right side bar. This function is meant to be used in conjunction with a button or a Windows Virtual Keyboard input.
+
+findRunCommand(syntax) - Used to execute a script if the syntax is found.
+
+windows_get_key(keyboard_stream, hexidecimal, string) - Not to be confused with windows_key_pressed(). This is the main function used to convert hexidecimal values from a keyboard stream into a string that the operating system can understand.
+
+windows_keyboard_input() - This function must be called to use keyboard input. Traditionally, the operating system will use this function while os_running is true.
 
 
 
+
+
+# Lua Functions:
+
+System.clearNumberOfDirectories() - Clears number of directories count.
+
+System.getNumberOfDirectories() - Gets the number of directories.
+
+System.listDirectory_NoUpdate() - Same a System.listDirectory() but without number of directory update.
+
+Timer.systemTime() - Returns a string from the PlayStation 2 hardware. Due to the hardware returning time at delayed interval use windows_system_time which already patches the information.
+
+Sound.playWav() - Plays a wav audio file with 44100hz frequency.
+
+Sound.playWav_CustomFrequency - Plays a wav audio file with frequency indicated.
 
 
 
