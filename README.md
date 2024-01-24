@@ -253,14 +253,25 @@ Sound.playWav_CustomFrequency - Plays a wav audio file with frequency indicated.
 
 # Process ID's
 
+Windows 10 for PlayStation 2 stores programs with process id's. You must keep these separate from each other or else there will be conflicts.
+
+Application name     -                      ID
 windowsvk                                   0
+
 settings                                    1
+
 explorer                                    2
+
 regedit                                     3 and 4
+
 cmd                                         5
+
 calc                                        6
+
 notepad                                     7
+
 paint                                       8
+
 windows                                     9732
 
 
