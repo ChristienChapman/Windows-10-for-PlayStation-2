@@ -368,4 +368,24 @@ helloworld_ui()
 end
 ```
 
+You will now need to add your new program to the system stack. In the System32 folder open get_programs.lua. Inside of the code you will add this:
+
+```
+openProgram("helloworld")
+```
+
+In the function getPrograms() add the following code:
+
+```
+if helloworld == true then
+
+helloworld_init()
+
+end
+```
+
+
+For the purposes of testing the program, go ahead and make helloworld true. You should see a window with a black background that says "Hello World".
+
+
 
