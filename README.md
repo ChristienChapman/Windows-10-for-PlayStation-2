@@ -296,7 +296,7 @@ Before we build our program, we will need a global boolean that the operating sy
 helloworld = false
 ```
 
-Next, we will need to intialize our application position and id. Refer to what Process ID's are in use and choose one that is open. Windows 10 for PlayStation 2 is capable of storing 10,000 ids. You do not have to intitialize the application positoon, however, for the purpose of drawing the window on the screen in the manner we want to, this is necessary. Depending on the size of your window you may or may not need to manually initialize your application position.
+Next, we will need to intialize our application position and id. Refer to what Process ID's are in use and choose one that is open. Windows 10 for PlayStation 2 is capable of storing 10,000 ids. You do not have to intitialize the application position, however, for the purpose of drawing the window on the screen in the manner we want to, this is necessary. Depending on the size of your window you may or may not need to manually initialize your application position.
 
 
 
