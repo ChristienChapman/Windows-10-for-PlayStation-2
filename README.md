@@ -255,32 +255,117 @@ Sound.playWav_CustomFrequency - Plays a wav audio file with frequency indicated.
 
 Windows 10 for PlayStation 2 stores programs with process id's. You must keep these separate from each other or else there will be conflicts.
 
-Application name     -                      ID
-windowsvk                                   0
+windowsvk 0
 
-settings                                    1
+settings 1
 
-explorer                                    2
+explorer 2
 
-regedit                                     3 and 4
+regedit 3 and 4
 
-cmd                                         5
+cmd 5
 
-calc                                        6
+calc 6
 
-notepad                                     7
+notepad 7
 
-paint                                       8
+paint 8
 
-windows                                     9732
-
+windows 9732
 
 
 
 
 
+# Tutorials:
 
 
-#Adding an Application to the Stack
+
+
+## 1. Creating a program
+
+
+Windows 10 for PlayStation 2 loads programs from the System/Windows10/System32/programs folder. To create a program, make a .lua file in the programs folder.
+
+There are a few basic functions that you must include in your program in order to utilize basic features of the operating system. For this tutorial we will be creating a program named helloworld.lua.
+
+Before we build our program, we will need a global boolean that the operating system can access. This will allow us to open and close the program in the future. This boolean should always be false when initialized. If it is set to true, then the program will start automatically. This is useful for debugging and testing purposes but leaving these in your releases will clutter up the screen.
+
+
+```
+helloworld = false
+```
+
+Next, we will need to intialize our application position and id. Refer to what Process ID's are in use and choose one that is open. Windows 10 for PlayStation 2 is capable of storing 10,000 ids. You do not have to intitialize the application positoon, however, for the purpose of drawing the window on the screen in the manner we want to, this is necessary. Depending on the size of your window you may or may not need to manually initialize your application position.
+
+
+
+```
+windows_application_position_y[109] = windows_application_position_y[109] - 70
+```
+
+
+We will now need to create our user interface function. This will be used within our program for the graphical output of our fucntion. This will be closely used in conjunction with our init function which is where we will store most of our program's code. As you can see within this function, we printed "Hello World" at a position stored in windows_applciation_position_x and windows_application_position_y. You will use both application positions as a means to anchor your program. This is necessary in order to make all graphics, text, and buttons within a program move alongside with the application focus bar. Otherwise, the program's assets will not move with it's application position. You must include windows_application_position_x and windows_application_position_y with all assets you intend to use in your program.
+
+```
+function helloworld_ui()
+
+
+
+print(windows_application_position_x[109]-90,windows_application_position_y[109],0.45,"Hello world!",white)
+
+
+end
+```
+
+Now we will turn our attention to the program's init function. This is our entry point into our application that the operating system will use. In here we will define our application's window, focus bar, and loops.
+
+
+```
+function helloworld_init()
+
+
+
+local application_name = "Hello World"
+local application_color_1 = black
+local application_color_2 = windows_highlight_color
+
+
+
+
+
+
+
+
+
+application_focus_bar(windows_application_position_x[109]-20, windows_application_position_y[109]-20, 640, 17,application_name, 8)
+
+if application_focus_button(windows_application_position_x[109]+510, windows_application_position_y[109]-20, 30, 17, "exit", 8) == true then
+
+helloworld = false
+windows_application_position_x[109] = 100
+windows_application_position_y[109] = 100 - 70
+
+end
+
+if application_focus_button(windows_application_position_x[109]+480, windows_application_position_y[109]-20, 30, 17, "maximize", 8) == true then
+
+windows_application_position_x[109] = 100
+windows_application_position_y[109] = 100 - 70
+
+end
+
+if application_focus_button(windows_application_position_x[109]+460, windows_application_position_y[109]-20, 20, 17, "minimize", 8) == true then
+
+windows_application_position_x[109] = 1000
+
+end
+
+windows_background(windows_application_position_x[109]-100, windows_application_position_y[109]-1, 640, 448, "box", application_color_1, application_name, 8)
+helloworld_ui()
+
+
+end
+```
 
 
