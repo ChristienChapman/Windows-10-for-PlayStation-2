@@ -71,7 +71,7 @@ renameDirectory(path, name) - Removes a directory at the given path then creates
 
 playWav(wav, frequency) - Plays a wav file at the frequency given. Pass in windows_frequency for the system default.
 
-getProgram(program) - Adds a program to the Windows 10 stack. To add an application refer to the section "Adding an Application to the Stack"
+getProgram(program) - Adds a program to the Windows 10 stack. To add an application refer to the section "Creating a program"
 
 
 
@@ -390,4 +390,70 @@ end
 For the purposes of testing the program, go ahead and make helloworld true. You should see a window with a black background that says "Hello World".
 
 
+
+
+## 2. Buttons
+
+
+Windows 10 for PlayStation 2 has a pre-programmed function to make creation of buttons easy and customizable. In our hello world program we will create two buttons that will change the print to a different value.
+
+
+Before we begin, we need to understand how a Windows button works and how to use it's function. When the cursor hits the collision of the button's hitbox, it will update the cursor to let the user know they can press it. Once the user presses the cross button on their DualShock 2 Controller it will send a return true signal to the if statement attached to the windows_button function. The operating system will then execute whatever code is inside the if statement. Thus, this is how we build graphical applications as you can use these buttons to do anything from move to another screen, create an object, say something, or do something. 
+
+Now let's understand the function's inputs:
+
+```
+windows_button(posx, posy, xlength, ylength, resource_type, resource, highlight, active_code, sleep, id)
+```
+
+posx and posy must be an integer. Both correspond to x and y positions respectively. This tells the function where to draw the button on screen. This acts as a starting point for the button.
+
+xlength and ylength must be an integer. Both correspond to the length of the button in the x and y positions respectively. This tells the function how wide and how long the button should be. 
+
+resource_type can either be image or box. Depending on the resource type indicated it will affect the rest of the function. Do be cautious to not mix types in a button. Passing resource as an image when resource_type is set to box will crash the operating system. image will have resource require an image type. box will have resource require a color type. 
+
+As described earlier, resource is dependent on the resource_type indicated. If resource_type is an image, resource must be an image. If it is a box, it must be a box.
+
+highlight is always a color unless the string passed is empty or "". This means that if you want the highlight to be disabled, pass in "". Anything else passed into highlight will be regarded as a color. When the cursor hovers over the button the highlight color will be shown.
+
+active_code is a string that tells windows_active_highlight what button is actively being highlighted. This is useful to create custom behaviors for when the user hovers over a button. You can check windows_active_highlight to be equal to the string of the active_code to wrap to the button. This allows for more customizability of the button's highlight.
+
+sleep is a boolean. True will run System.sleep(1). False will not run the sleep cycle.
+
+id must be an integer. This is used to have the button correspond to the application it is relative to.
+
+Above helloworld_ui() declare local message = "". Clear out helloworld_ui() and replace it with this:
+
+
+```
+function helloworld_ui()
+
+
+
+print(windows_application_position_x[109]-90,windows_application_position_y[109],0.45,message,white)
+
+if windows_button(windows_application_position_x[109]-9+32, windows_application_position_y[109]+20, 60, 30, "box", red, white, "button_1", false, 109) == true then
+
+message = "RED LIGHT"
+end
+
+if windows_button(windows_application_position_x[109]-9+32+100, windows_application_position_y[109]+20, 60, 30, "box", green, white, "button_2", false, 109) == true then
+
+message = "GREEN LIGHT"
+end
+
+if windows_active_highlight == "button_1" then
+print(windows_application_position_x[109]-90,windows_application_position_y[109]+100,0.45,windows_active_highlight,white)
+end
+
+if windows_active_highlight == "button_2" then
+print(windows_application_position_x[109]-90,windows_application_position_y[109]+100,0.45,windows_active_highlight,white)
+end
+
+
+end
+```
+
+
+Now run the program. You should see two buttons, one red and one green. You should also see text that says which button is active.
 
