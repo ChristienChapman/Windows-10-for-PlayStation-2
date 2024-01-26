@@ -457,3 +457,153 @@ end
 
 Now run the program. You should see two buttons, one red and one green. You should also see text that says which button is active.
 
+
+
+
+
+
+## 2. Text Input
+
+
+There are two types of text input included in this operating system. One that checks a string and compares it to another value and one that sends the information provided by the user off to another data type.
+
+```
+windows_box_text_input(posx, posy, xlength, ylength, resource_type, resource, action_code)
+```
+
+This particular function is used to compare the user input to another string. This is used for authentication purposes such as checking for a correct password.
+
+posx, posy, xlength, and ylength all have the same behavior as these types apply to windows_button.
+
+resource_type can either be image or box and has the same behavior as windows_button.
+
+Depending on the resource_type, resource will either be a color type or an image type.
+
+action_code can be left empty or equal compare. If set to compare, the character after the space "compare " will be the string that the input will check, and if equal to what the user inputs, return true. For example, if action_code equals ```"compare " .. windows_password``` then the string windows_password will be compared.
+
+```
+windows_box_text_input_string(posx, posy, xlength, ylength, resource_type, resource)
+```
+
+This is the other input function. It's purpose is solely to receive an input from the user and push to a data type as indicated in the attached code. This has the same behavior as the previous function or windows_button.
+
+Now that we understand the differences between these two text input functions, now we can apply them. Below is an example of how we use these functions. The program below will check for a user's input for the name of the quiz, and then will proceed to a set of three questions. We will use both text input functions below. Before using this code, create a new program called quiz.lua and notate it's code into the operating system stack.
+
+```
+quiz = true
+
+local question = {}
+local answer = {}
+local current_question = 0
+local quiz_name = ""
+
+question[1] = "A Star Wars game on PlayStation 2 with a sequel?"
+answer[1] = "star wars battlefront ii"
+question[2] = "This programming language?"
+answer[2] = "lua"
+question[3] = "Jane?"
+answer[3] = "tarzan"
+question[4] = "Quiz complete..."
+answer[4] = "....."
+
+
+function getQuestion(id)
+
+print(windows_application_position_x[110]-90,windows_application_position_y[110]+13,0.45,question[id],white)
+print(windows_application_position_x[110]-90,windows_application_position_y[110]+13+13,0.45,"Answer: " .. windows_text_input_stream,white)
+if windows_box_text_input(windows_application_position_x[110]-90, windows_application_position_y[110]+26+13, 200, 35, "box", grey, "compare " .. answer[id]) == true then
+
+current_question = current_question + 1
+windows_text_input_stream = ""
+
+end
+
+end
+
+function quiz_ui()
+
+
+
+print(windows_application_position_x[110]-90,windows_application_position_y[110],0.45,quiz_name,white)
+
+if current_question > 0 then
+getQuestion(current_question)
+end
+
+
+end
+
+
+function quiz_init()
+
+
+local application_name = quiz_name
+local application_color_1 = black
+local application_color_2 = windows_highlight_color
+
+
+
+
+
+
+
+
+
+application_focus_bar(windows_application_position_x[110]-20, windows_application_position_y[110]-20, 640, 17,application_name, 110)
+
+if application_focus_button(windows_application_position_x[110]+510, windows_application_position_y[110]-20, 30, 17, "exit", 110) == true then
+
+quiz = false
+windows_application_position_x[110] = 100
+windows_application_position_y[110] = 100 - 70
+
+end
+
+if application_focus_button(windows_application_position_x[110]+480, windows_application_position_y[110]-20, 30, 17, "maximize", 110) == true then
+
+windows_application_position_x[110] = 100
+windows_application_position_y[110] = 100 - 70
+
+end
+
+if application_focus_button(windows_application_position_x[110]+460, windows_application_position_y[110]-20, 20, 17, "minimize", 110) == true then
+
+windows_application_position_x[110] = 1000
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+windows_background(windows_application_position_x[110]-100, windows_application_position_y[110]-1, 640, 448, "box", application_color_1, application_name, 110)
+
+if current_question == 0 then
+if windows_box_text_input_string(windows_application_position_x[110]-90, windows_application_position_y[110]-90+120, 200, 35, "box", grey) == "enter" then
+quiz_name = windows_text_input_stream
+windows_text_input_stream = ""
+current_question = 1
+end
+end
+quiz_ui()
+
+
+
+
+end
+
+```
+
