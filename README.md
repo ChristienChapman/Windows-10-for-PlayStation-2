@@ -462,7 +462,7 @@ Now run the program. You should see two buttons, one red and one green. You shou
 
 
 
-## 2. Text Input
+## 3. Text Input
 
 
 There are two types of text input included in this operating system. One that checks a string and compares it to another value and one that sends the information provided by the user off to another data type.
