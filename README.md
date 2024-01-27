@@ -607,3 +607,44 @@ end
 
 ```
 
+
+
+
+## 4. Registries
+
+
+Windows 10 for PlayStation 2 utilizes registries for save data. A registry can contain a variable which contains the data that can be pulled to send to a data type. This is used throughout the operating system. All registries are stored in the folder System/Windows10/System32/registry. To create a registry, call the function ```windows_registry_create(program_name, variable)```
+
+program_name is the name of the registry to be created, variable is the name of the variable to be created.
+
+If you passed in "test" in both inputs the function would create a registry named test with a variable named test. You must create all variables in a registry before writing to them. All variables will be init with "empty."
+
+To write to a variable within a registry, use the function ```windows_registry_write(program_name, variable, data)```
+
+This function will delete the "empty" or previous data and write the new data in the registry and variable that was input.
+
+In order to get data from a registry variable, use the function ```windows_registry_get(program_name, variable)```
+
+This will return the data of the variable. 
+
+Remember, these registry functions are very sensitive and your programs must be developed to accomodate the limitations of these functions. If the PlayStation 2 has a threading issue with writing or creating a registry or it's variables, then calling the get function will cause the console to freeze. Never run more than three write operations at once as the PlayStation 2 cannot handle more than three. Anything past the third write will be dropped. This problem does not seem to occur with create or get under normal circumstances. 
+
+Here is an idea of how the registry system might be used:
+
+```
+windows_registry_create("AnimalCity", "animal")
+local animal = windows_registry_get("AnimalCity", "animal")
+
+
+function getAnimal()
+
+if animal == "empty" then
+
+windows_registry_write("AnimalCity", "animal", "cat")
+
+end
+
+
+end
+```
+
